@@ -1,0 +1,5 @@
+export { default as AccelerometerScreen } from './Accelerometer'
+export { default as BarometerScreen } from './Barometer'
+export { default as GyroscopeScreen } from './Gyroscope'
+export { default as MagnetometerScreen } from './Magnetometer'
+export { default as PedometerScreen } from './Pedometer'
