@@ -1,13 +1,8 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform
-} from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import { Barometer } from 'expo-sensors'
 import { Subscription } from '@utils/types'
+import { Button } from 'react-native-paper'
 
 export default function App() {
   const [{ pressure, relativeAltitude }, setData] = useState({
@@ -38,7 +33,9 @@ export default function App() {
 
   return (
     <View style={styles.wrapper}>
-      <Text>Barometer: Listener {subscription ? 'ACTIVE' : 'INACTIVE'}</Text>
+      <Text style={styles.title}>
+        Barometer: Listener {subscription ? 'ACTIVE' : 'INACTIVE'}
+      </Text>
       <Text>Pressure: {pressure} hPa</Text>
       <Text>
         Relative Altitude:{' '}
@@ -46,9 +43,9 @@ export default function App() {
           ? `${relativeAltitude} m`
           : `Only available on iOS`}
       </Text>
-      <TouchableOpacity onPress={toggleListener} style={styles.button}>
-        <Text>Toggle listener</Text>
-      </TouchableOpacity>
+      <Button onPress={toggleListener} style={styles.button}>
+        <Text style={{ color: '#FFFFFF' }}>Toggle listener</Text>
+      </Button>
     </View>
   )
 }
@@ -57,9 +54,15 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eee',
-    padding: 10,
-    marginTop: 15
+    backgroundColor: '#1A6C30',
+    padding: 4,
+    marginTop: 10
+  },
+  title: {
+    textAlign: 'center',
+    color: '#002108',
+    fontWeight: '700',
+    marginBottom: 10
   },
   wrapper: {
     flex: 1,

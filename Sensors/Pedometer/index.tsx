@@ -46,7 +46,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
+      <Text style={styles.title}>
+        Pedometer.isAvailableAsync(): {isPedometerAvailable}
+      </Text>
       {Platform.OS === 'ios' ? (
         <>
           <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
@@ -65,5 +67,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  title: {
+    textAlign: 'center',
+    color: '#002108',
+    fontWeight: '700'
   }
 })

@@ -5,7 +5,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@icons/*": ["assets/Icons/*"],
+      "@components/*": ["components/*"]
     }
   }
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { Magnetometer } from 'expo-sensors'
 import { Subscription } from '@utils/types'
+import { Button } from 'react-native-paper'
 
 export default function Compass() {
   const [{ x, y, z }, setData] = useState({
@@ -34,26 +35,25 @@ export default function Compass() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Magnetometer:</Text>
+      <Text style={styles.title}>Magnetometer:</Text>
       <Text style={styles.text}>x: {x}</Text>
       <Text style={styles.text}>y: {y}</Text>
       <Text style={styles.text}>z: {z}</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        <Button
           onPress={subscription ? _unsubscribe : _subscribe}
           style={styles.button}
         >
-          <Text>{subscription ? 'On' : 'Off'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={_slow}
-          style={[styles.button, styles.middleButton]}
-        >
-          <Text>Slow</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={_fast} style={styles.button}>
-          <Text>Fast</Text>
-        </TouchableOpacity>
+          <Text style={{ color: '#FFFFFF' }}>
+            {subscription ? 'On' : 'Off'}
+          </Text>
+        </Button>
+        <Button onPress={_slow} style={[styles.button, styles.middleButton]}>
+          <Text style={{ color: '#FFFFFF' }}>Slow</Text>
+        </Button>
+        <Button onPress={_fast} style={styles.button}>
+          <Text style={{ color: '#FFFFFF' }}>Fast</Text>
+        </Button>
       </View>
     </View>
   )
@@ -65,6 +65,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10
   },
+  title: {
+    textAlign: 'center',
+    color: '#002108',
+    fontWeight: '700'
+  },
   text: {
     textAlign: 'center'
   },
@@ -75,10 +80,11 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
+    margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eee',
-    padding: 10
+    backgroundColor: '#1A6C30',
+    padding: 4
   },
   middleButton: {
     borderLeftWidth: 1,

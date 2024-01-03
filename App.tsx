@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { StyleSheet, View, Image } from 'react-native'
+import { NavigationContainer, CommonActions } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Text, BottomNavigation } from 'react-native-paper'
-
 import { Platform } from 'react-native'
+import { HarkaySoftBlack } from './assets/Icons/Harkaysoft'
+import { JhangmezBlack } from './assets/Icons/jhangmez'
 
 import {
   AccelerometerScreen,
@@ -12,26 +13,77 @@ import {
   GyroscopeScreen,
   MagnetometerScreen,
   PedometerScreen
-} from './Sensors'
+} from './sensors'
 
 const Tab = createBottomTabNavigator()
 
 function HelloWorldScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>
-        Hola Mundo, esta es una aplicacion creada por @jhangmez de HarkaySoft
-      </Text>
-    </View>
+    <>
+      <View style={styles.absolute}>
+        <HarkaySoftBlack />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.textStyle}>
+          Hola Mundo, esta es una aplicacion creada por <JhangmezBlack /> de
+          HarkaySoft
+        </Text>
+      </View>
+    </>
   )
 }
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+        tabBar={({ navigation, state, descriptors, insets }) => (
+          <BottomNavigation.Bar
+            navigationState={state}
+            safeAreaInsets={insets}
+            onTabPress={({ route, preventDefault }) => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true
+              })
+
+              if (event.defaultPrevented) {
+                preventDefault()
+              } else {
+                navigation.dispatch({
+                  ...CommonActions.navigate(route.name, route.params),
+                  target: state.key
+                })
+              }
+            }}
+            renderIcon={({ route, focused, color }) => {
+              const { options } = descriptors[route.key]
+              if (options.tabBarIcon) {
+                return options.tabBarIcon({ focused, color, size: 24 })
+              }
+
+              return null
+            }}
+            getLabelText={({ route }) => {
+              const { options } = descriptors[route.key]
+              const label =
+                options.tabBarLabel !== undefined
+                  ? options.tabBarLabel
+                  : options.title !== undefined
+                  ? options.title
+                  : route.name
+
+              return label.toString()
+            }}
+          />
+        )}
+      >
         <Tab.Screen
-          name='HelloWorld'
+          name='Home'
           component={HelloWorldScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
@@ -92,10 +144,19 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  absolute: {
+    position: 'absolute',
+    top: 40,
+    left: 10
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
+    paddingHorizontal: 20
+  },
+  textStyle: {
+    fontSize: 26,
+    fontWeight: '600'
   }
 })
