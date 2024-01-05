@@ -45,10 +45,34 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='two'
+        name='dos/index'
         options={{
           title: 'Tab Two',
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name='tres/index'
+        options={{
+          title: 'Sensors',
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name='compass' color={color} />
+          ),
+          headerLeft: () => (
+            <Link href='/modal' asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name='navicon'
+                    size={25}
+                    color={Colors[colorScheme ?? 'light'].text}
+                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          )
         }}
       />
     </Tabs>
