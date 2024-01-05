@@ -1,17 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Expo](https://expo.dev/) project by [@jhangmez](https://www.linkedin.com/in/jhangmez/)
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx expo start
+```
+
+```
+import { useAccelerometer, useGyroscope,useBarometer  } from '../hooks/useSensors';
+
+const AccelerometerScreen = () => {
+ const { data, _slow, _fast } = useAccelerometer();
+ // Rest of the code...
+};
+
+const BarometerScreen = () => {
+ const { data, _unsubscribe } = useBarometer();
+// Rest of the code...
+};
+
+const GyroscopeScreen = () => {
+ const { data, _slow, _fast } = useGyroscope();
+ // Rest of the code...
+};
+
+const LightSensorScreen = () => {
+ const { illuminance, _unsubscribe } = useLightSensor();
+ // Resto del código...
+};
+
+const MagnetometerScreen = () => {
+ const { data, _slow, _fast, _unsubscribe } = useMagnetometer();
+ // Resto del código...
+};
+
+const PedometerScreen = () => {
+ const { stepCount, _unsubscribe } = usePedometer();
+ // Resto del código...
+};
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
