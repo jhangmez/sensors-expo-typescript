@@ -1,24 +1,23 @@
 import { StyleSheet } from 'react-native'
-
+import { useAccelerometer } from '@hooks/useSensors'
 import EditScreenInfo from '@components/EditScreenInfo'
 import { Text, View } from '@components/Themed'
-import { HarkaySoftBlack } from '@icons/Harkaysoft'
-import { JhangmezBlack } from '@icons/jhangmez'
 
-export default function TabOneScreen() {
+export default function AccelerometerScreen() {
+  const { data, _slow, _fast } = useAccelerometer()
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Harkaysoft</Text>
-      <Text>
-        Hola Mundo, esta es una aplicacion creada por <JhangmezBlack /> de
-        <HarkaySoftBlack />
-      </Text>
+      <Text style={styles.title}>Acelerometro</Text>
+      <Text>DATA DE x:{data.x}</Text>
+      <Text>DATA DE y:{data.y}</Text>
+      <Text>DATA DE z:{data.z}</Text>
       {/* <View
         style={styles.separator}
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <EditScreenInfo path='app/(tabs)/index.tsx' /> */}
+      <EditScreenInfo path='app/(tabs)/two.tsx' /> */}
     </View>
   )
 }

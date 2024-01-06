@@ -1,24 +1,21 @@
 import { StyleSheet } from 'react-native'
-
+import { useLightSensor } from '@hooks/useSensors'
 import EditScreenInfo from '@components/EditScreenInfo'
 import { Text, View } from '@components/Themed'
-import { HarkaySoftBlack } from '@icons/Harkaysoft'
-import { JhangmezBlack } from '@icons/jhangmez'
 
-export default function TabOneScreen() {
+export default function LightSensorScreen() {
+  const { illuminance, _unsubscribe } = useLightSensor()
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Harkaysoft</Text>
-      <Text>
-        Hola Mundo, esta es una aplicacion creada por <JhangmezBlack /> de
-        <HarkaySoftBlack />
-      </Text>
+      <Text style={styles.title}>LightSensor</Text>
+      <Text>DATA DE illuminance:{illuminance}</Text>
       {/* <View
         style={styles.separator}
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <EditScreenInfo path='app/(tabs)/index.tsx' /> */}
+      <EditScreenInfo path='app/(tabs)/two.tsx' /> */}
     </View>
   )
 }

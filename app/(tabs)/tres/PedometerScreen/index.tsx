@@ -1,18 +1,21 @@
 import { StyleSheet } from 'react-native'
-
+import { usePedometer } from '@hooks/useSensors'
 import EditScreenInfo from '@components/EditScreenInfo'
 import { Text, View } from '@components/Themed'
 
-export default function TabTwoScreen() {
+export default function PedometerScreen() {
+  const { stepCount, _unsubscribe } = usePedometer()
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View
+      <Text style={styles.title}>Pedometer</Text>
+      <Text>DATA DE stepCount:{stepCount}</Text>
+      {/* <View
         style={styles.separator}
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <EditScreenInfo path='app/(tabs)/two.tsx' />
+      <EditScreenInfo path='app/(tabs)/two.tsx' /> */}
     </View>
   )
 }

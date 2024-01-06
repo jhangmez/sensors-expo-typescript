@@ -1,24 +1,22 @@
 import { StyleSheet } from 'react-native'
-
+import { useBarometer } from '@hooks/useSensors'
 import EditScreenInfo from '@components/EditScreenInfo'
 import { Text, View } from '@components/Themed'
-import { HarkaySoftBlack } from '@icons/Harkaysoft'
-import { JhangmezBlack } from '@icons/jhangmez'
 
-export default function TabOneScreen() {
+export default function BarometerScreen() {
+  const { data, _unsubscribe } = useBarometer()
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Harkaysoft</Text>
-      <Text>
-        Hola Mundo, esta es una aplicacion creada por <JhangmezBlack /> de
-        <HarkaySoftBlack />
-      </Text>
+      <Text style={styles.title}>Barometer</Text>
+      <Text>DATA DE pressure:{data.pressure}</Text>
+      <Text>DATA DE pressure:{data.relativeAltitude}</Text>
       {/* <View
         style={styles.separator}
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <EditScreenInfo path='app/(tabs)/index.tsx' /> */}
+      <EditScreenInfo path='app/(tabs)/two.tsx' /> */}
     </View>
   )
 }

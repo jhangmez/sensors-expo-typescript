@@ -1,17 +1,18 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import { Link, Tabs } from 'expo-router'
 import { Pressable, useColorScheme } from 'react-native'
+import { HarkaySoftBlack } from '@icons/Harkaysoft'
 
-import Colors from '../../constants/Colors'
+import Colors from '@constants/Colors'
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name']
+  name: React.ComponentProps<typeof Ionicons>['name']
   color: string
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />
+  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />
 }
 
 export default function TabLayout() {
@@ -26,14 +27,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name='index'
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          tabBarLabel: 'harkaysoft',
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name='checkmark-circle' color={color} />
+          ),
+          // headerShown: false,
           headerRight: () => (
             <Link href='/modal' asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name='info-circle'
+                  <Ionicons
+                    name='information-outline'
                     size={25}
                     color={Colors[colorScheme ?? 'light'].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
@@ -41,38 +46,40 @@ export default function TabLayout() {
                 )}
               </Pressable>
             </Link>
+          ),
+          headerLeft: () => (
+            <Link
+              href='https://harkaysoft.vercel.app'
+              style={{ marginLeft: 15 }}
+            >
+              <HarkaySoftBlack />
+            </Link>
           )
         }}
       />
       <Tabs.Screen
-        name='dos/index'
-        options={{
-          title: 'Tab Two',
-          headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />
-        }}
-      />
-      <Tabs.Screen
-        name='tres/index'
+        name='tres'
         options={{
           title: 'Sensors',
           tabBarIcon: ({ color }) => (
             <TabBarIcon name='compass' color={color} />
           ),
-          headerLeft: () => (
-            <Link href='/modal' asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name='navicon'
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          )
+          headerShown: false
+          // ,
+          // headerLeft: () => (
+          //   <Link href='/modal' asChild>
+          //     <Pressable>
+          //       {({ pressed }) => (
+          //         <FontAwesome
+          //           name='navicon'
+          //           size={25}
+          //           color={Colors[colorScheme ?? 'light'].text}
+          //           style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
+          //         />
+          //       )}
+          //     </Pressable>
+          //   </Link>
+          // )
         }}
       />
     </Tabs>
